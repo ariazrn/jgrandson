@@ -1,0 +1,33 @@
+{
+  "name": "@jgrandson/parser",
+  "version": "1.0.0",
+  "description": "Parser: JGrandson tokens → AST.",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@jgrandson/ast": "^1.0.0",
+    "@jgrandson/lexer": "^1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jgrandson/jgrandson.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jgrandson/jgrandson/issues"
+  },
+  "homepage": "https://jgrandson.dev",
+  "author": "JGrandson Team <team@jgrandson.dev>",
+  "keywords": [
+    "jgrandson",
+    "language",
+    "compiler",
+    "react"
+  ]
+}

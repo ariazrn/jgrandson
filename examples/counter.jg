@@ -1,0 +1,17 @@
+page Counter {
+  state {
+    count: number = 0
+  }
+
+  text {
+    content: "Count: " + count
+  }
+
+  button {
+    text: "+"
+
+    onClick {
+      count++
+    }
+  }
+}

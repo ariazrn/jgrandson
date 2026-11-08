@@ -1,0 +1,67 @@
+// AI Token Streaming Demo in JGrandson (.jg)
+
+route POST "/api/ai/stream" {
+  let prompt = req.body.prompt
+  let response = "JGrandson natively streams response tokens using Server-Sent Events (SSE)!"
+  return { prompt: prompt, response: response }
+}
+
+page AiStreamViewer {
+  state {
+    promptText: string = ""
+    streamedOutput: string = ""
+    isGenerating: boolean = false
+  }
+
+  style {
+    maxWidth: 720
+    margin: "40px auto"
+    fontFamily: "system-ui, sans-serif"
+    padding: 24
+    backgroundColor: "#ffffff"
+    borderRadius: 12
+    boxShadow: "0 4px 6px -1px rgba(0,0,0,0.1)"
+  }
+
+  main {
+    h1 { text { content: "AI Token Streaming" } }
+    p { text { content: "Experience realtime AI token streaming compiled by JGrandson." } }
+
+    div {
+      style {
+        marginTop: 20
+        marginBottom: 20
+      }
+      input {
+        placeholder: "Ask something..."
+        value: promptText
+        onInput(val) {
+          promptText = val
+        }
+      }
+      button {
+        text: "Generate Stream"
+        onClick {
+          if promptText != "" {
+            isGenerating = true
+            streamedOutput = "Connecting to SSE stream..."
+            isGenerating = false
+          }
+        }
+      }
+    }
+
+    div {
+      style {
+        padding: 16
+        backgroundColor: "#f1f5f9"
+        borderRadius: 8
+        minHeight: 120
+        whiteSpace: "pre-wrap"
+      }
+      p {
+        text { content: streamedOutput }
+      }
+    }
+  }
+}

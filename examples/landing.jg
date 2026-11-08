@@ -1,0 +1,408 @@
+page Landing {
+  state {
+    started: boolean = false
+  }
+
+  style {
+    minHeight: "100vh"
+    padding: "28px 6vw 72px"
+    background: "radial-gradient(circle at 12% 10%, #243b6b 0%, #10182e 38%, #070b16 100%)"
+    color: "#f8fafc"
+    fontFamily: "Inter, ui-sans-serif, system-ui, sans-serif"
+  }
+
+  nav {
+    style {
+      maxWidth: 1180
+      margin: "0 auto"
+      display: "flex"
+      alignItems: "center"
+      justifyContent: "space-between"
+      padding: "10px 0 48px"
+    }
+
+    div {
+      style {
+        display: "flex"
+        alignItems: "center"
+        gap: 12
+        fontSize: 20
+        fontWeight: 800
+        letterSpacing: "-0.03em"
+      }
+
+      span {
+        style {
+          width: 38
+          height: 38
+          display: "grid"
+          placeItems: "center"
+          borderRadius: 12
+          background: "linear-gradient(135deg, #7c3aed, #22d3ee)"
+          boxShadow: "0 10px 30px rgba(34, 211, 238, 0.25)"
+        }
+
+        text: "JG"
+      }
+
+      text {
+        content: "JGrandson"
+      }
+    }
+
+    div {
+      style {
+        display: "flex"
+        alignItems: "center"
+        gap: 24
+      }
+
+      a {
+        href: "#features"
+
+        style {
+          color: "#cbd5e1"
+          textDecoration: "none"
+          fontWeight: 600
+        }
+
+        text: "Features"
+      }
+
+      a {
+        href: "#start"
+
+        style {
+          color: "#07111f"
+          background: "#f8fafc"
+          textDecoration: "none"
+          fontWeight: 800
+          padding: "11px 18px"
+          borderRadius: 999
+        }
+
+        text: "Start building"
+      }
+    }
+  }
+
+  main {
+    style {
+      maxWidth: 1180
+      margin: "0 auto"
+    }
+
+    section {
+      style {
+        minHeight: "68vh"
+        display: "grid"
+        gridTemplateColumns: "1.12fr 0.88fr"
+        alignItems: "center"
+        gap: 64
+      }
+
+      div {
+        span {
+          style {
+            display: "inline-flex"
+            alignItems: "center"
+            padding: "8px 13px"
+            marginBottom: 24
+            border: "1px solid rgba(125, 211, 252, 0.28)"
+            borderRadius: 999
+            background: "rgba(14, 165, 233, 0.08)"
+            color: "#7dd3fc"
+            fontSize: 13
+            fontWeight: 800
+            letterSpacing: "0.08em"
+            textTransform: "uppercase"
+          }
+
+          text: "A simpler way to build interfaces"
+        }
+
+        h1 {
+          style {
+            maxWidth: 720
+            margin: "0 0 24px"
+            fontSize: "clamp(52px, 7vw, 88px)"
+            lineHeight: "0.98"
+            letterSpacing: "-0.065em"
+            background: "linear-gradient(110deg, #ffffff 20%, #a5b4fc 58%, #67e8f9)"
+            backgroundClip: "text"
+            color: "transparent"
+          }
+
+          text: "Ideas to interfaces, beautifully fast."
+        }
+
+        p {
+          style {
+            maxWidth: 610
+            margin: "0 0 34px"
+            color: "#aebbd0"
+            fontSize: 19
+            lineHeight: "1.75"
+          }
+
+          text: "JGrandson is a clear, expressive language for creating modern web experiences without drowning in framework code."
+        }
+
+        div {
+          style {
+            display: "flex"
+            alignItems: "center"
+            gap: 14
+          }
+
+          button {
+            id: "start"
+
+            style {
+              border: "0"
+              padding: "15px 24px"
+              borderRadius: 14
+              background: "linear-gradient(135deg, #8b5cf6, #06b6d4)"
+              color: "white"
+              fontSize: 16
+              fontWeight: 800
+              cursor: "pointer"
+              boxShadow: "0 16px 42px rgba(99, 102, 241, 0.35)"
+            }
+
+            text: "Create something great"
+
+            onClick {
+              started = true
+            }
+          }
+
+          a {
+            href: "#features"
+
+            style {
+              padding: "14px 20px"
+              color: "#dbeafe"
+              textDecoration: "none"
+              fontWeight: 700
+            }
+
+            text: "Explore the language →"
+          }
+        }
+
+        if started {
+          p {
+            style {
+              marginTop: 20
+              color: "#67e8f9"
+              fontWeight: 700
+            }
+
+            text: "Your next idea starts in a .jg file."
+          }
+        }
+      }
+
+      aside {
+        style {
+          position: "relative"
+          padding: 1
+          borderRadius: 24
+          background: "linear-gradient(145deg, rgba(167, 139, 250, 0.8), rgba(34, 211, 238, 0.25), rgba(255,255,255,0.08))"
+          boxShadow: "0 40px 100px rgba(0, 0, 0, 0.48)"
+        }
+
+        div {
+          style {
+            padding: "18px 20px 24px"
+            borderRadius: 23
+            background: "rgba(8, 14, 30, 0.94)"
+            backdropFilter: "blur(22px)"
+          }
+
+          div {
+            style {
+              display: "flex"
+              gap: 8
+              paddingBottom: 18
+              borderBottom: "1px solid rgba(148, 163, 184, 0.14)"
+            }
+
+            span {
+              style {
+                width: 10
+                height: 10
+                borderRadius: 999
+                background: "#fb7185"
+              }
+            }
+
+            span {
+              style {
+                width: 10
+                height: 10
+                borderRadius: 999
+                background: "#fbbf24"
+              }
+            }
+
+            span {
+              style {
+                width: 10
+                height: 10
+                borderRadius: 999
+                background: "#34d399"
+              }
+            }
+          }
+
+          pre {
+            style {
+              margin: "24px 0 0"
+              color: "#c4b5fd"
+              fontFamily: "JetBrains Mono, Consolas, monospace"
+              fontSize: 15
+              lineHeight: "1.8"
+              whiteSpace: "pre-wrap"
+            }
+
+            text: "page Dream {\n  text {\n    content: \"Build the future\"\n  }\n\n  button {\n    text: \"Launch\"\n  }\n}"
+          }
+        }
+      }
+    }
+
+    section {
+      id: "features"
+
+      style {
+        padding: "96px 0 28px"
+      }
+
+      div {
+        style {
+          textAlign: "center"
+          maxWidth: 700
+          margin: "0 auto 48px"
+        }
+
+        h2 {
+          style {
+            margin: "0 0 16px"
+            fontSize: 42
+            letterSpacing: "-0.045em"
+          }
+
+          text: "Less ceremony. More creation."
+        }
+
+        p {
+          style {
+            margin: 0
+            color: "#94a3b8"
+            fontSize: 18
+            lineHeight: "1.7"
+          }
+
+          text: "Everything you need to turn readable ideas into responsive experiences."
+        }
+      }
+
+      div {
+        style {
+          display: "grid"
+          gridTemplateColumns: "repeat(3, 1fr)"
+          gap: 18
+        }
+
+        article {
+          style {
+            padding: 28
+            border: "1px solid rgba(148, 163, 184, 0.16)"
+            borderRadius: 20
+            background: "rgba(15, 23, 42, 0.62)"
+          }
+
+          h3 {
+            style {
+              margin: "0 0 12px"
+              color: "#c4b5fd"
+              fontSize: 20
+            }
+
+            text: "Readable by design"
+          }
+
+          p {
+            style {
+              margin: 0
+              color: "#94a3b8"
+              lineHeight: "1.7"
+            }
+
+            text: "Code that reads like the interface you imagined, with state and interaction built in."
+          }
+        }
+
+        article {
+          style {
+            padding: 28
+            border: "1px solid rgba(148, 163, 184, 0.16)"
+            borderRadius: 20
+            background: "rgba(15, 23, 42, 0.62)"
+          }
+
+          h3 {
+            style {
+              margin: "0 0 12px"
+              color: "#67e8f9"
+              fontSize: 20
+            }
+
+            text: "Instant feedback"
+          }
+
+          p {
+            style {
+              margin: 0
+              color: "#94a3b8"
+              lineHeight: "1.7"
+            }
+
+            text: "Save a .jg file and see the browser update immediately while your idea is fresh."
+          }
+        }
+
+        article {
+          style {
+            padding: 28
+            border: "1px solid rgba(148, 163, 184, 0.16)"
+            borderRadius: 20
+            background: "rgba(15, 23, 42, 0.62)"
+          }
+
+          h3 {
+            style {
+              margin: "0 0 12px"
+              color: "#f0abfc"
+              fontSize: 20
+            }
+
+            text: "Made for the web"
+          }
+
+          p {
+            style {
+              margin: 0
+              color: "#94a3b8"
+              lineHeight: "1.7"
+            }
+
+            text: "Compile to React and TypeScript while keeping your source focused and expressive."
+          }
+        }
+      }
+    }
+  }
+}

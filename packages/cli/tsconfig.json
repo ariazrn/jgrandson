@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist"
+  },
+  "include": ["src"],
+  "references": [
+    { "path": "../ast" },
+    { "path": "../lexer" },
+    { "path": "../parser" },
+    { "path": "../analyzer" },
+    { "path": "../compiler" }
+  ]
+}

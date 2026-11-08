@@ -1,0 +1,6 @@
+{
+  "source": "examples",
+  "out": "my-app/src/jg",
+  "entry": "Landing",
+  "routing": false
+}

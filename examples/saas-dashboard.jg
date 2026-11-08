@@ -1,0 +1,118 @@
+// SaaS Dashboard with full CRUD & analytics in JGrandson (.jg)
+
+route GET "/api/dashboard" {
+  let db = new SQLiteAdapter("saas.db")
+  let stats = await db.query("SELECT COUNT(*) as total_users, SUM(revenue) as total_revenue FROM analytics")
+  let recentUsers = await db.query("SELECT id, name, role, created_at FROM users ORDER BY id DESC LIMIT 5")
+  return {
+    stats: stats[0] || { total_users: 1240, total_revenue: 84500 },
+    users: recentUsers
+  }
+}
+
+route POST "/api/users" {
+  let body = req.body
+  let db = new SQLiteAdapter("saas.db")
+  await db.execute("INSERT INTO users (name, role, revenue) VALUES (?, ?, ?)", [body.name, body.role || "Member", 0])
+  return { success: true, message: "User registered" }
+}
+
+page Dashboard {
+  state {
+    activeTab: string = "overview"
+    totalUsers: number = 1240
+    totalRevenue: number = 84500
+    newUserName: string = ""
+    newUserRole: string = "Developer"
+  }
+
+  style {
+    fontFamily: "Inter, sans-serif"
+    backgroundColor: "#f8fafc"
+    color: "#0f172a"
+    padding: 32
+  }
+
+  main {
+    header {
+      style {
+        display: "flex"
+        justifyContent: "space-between"
+        alignItems: "center"
+        marginBottom: 24
+      }
+      h1 { text { content: "Enterprise Cloud Dashboard" } }
+      div {
+        button {
+          text: "Refresh Data"
+          onClick {
+            totalUsers += 1
+            totalRevenue += 50
+          }
+        }
+      }
+    }
+
+    section {
+      style {
+        display: "flex"
+        gap: 16
+        marginBottom: 24
+      }
+      div {
+        style {
+          flex: 1
+          padding: 20
+          backgroundColor: "#ffffff"
+          borderRadius: 8
+          border: "1px solid #e2e8f0"
+        }
+        h3 { text { content: "Total Registered Users" } }
+        p { text { content: "" + totalUsers } }
+      }
+      div {
+        style {
+          flex: 1
+          padding: 20
+          backgroundColor: "#ffffff"
+          borderRadius: 8
+          border: "1px solid #e2e8f0"
+        }
+        h3 { text { content: "Annual Recurring Revenue" } }
+        p { text { content: "$" + totalRevenue } }
+      }
+    }
+
+    section {
+      style {
+        backgroundColor: "#ffffff"
+        padding: 24
+        borderRadius: 8
+        border: "1px solid #e2e8f0"
+      }
+      h2 { text { content: "Add Team Member" } }
+      div {
+        style {
+          display: "flex"
+          gap: 12
+          marginTop: 12
+        }
+        input {
+          placeholder: "Member name..."
+          onInput(val) {
+            newUserName = val
+          }
+        }
+        button {
+          text: "Add Member"
+          onClick {
+            if newUserName != "" {
+              totalUsers += 1
+              newUserName = ""
+            }
+          }
+        }
+      }
+    }
+  }
+}

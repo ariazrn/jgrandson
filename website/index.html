@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Learn JGrandson: a readable full-stack language for interfaces, servers, and AI-assisted applications." />
+    <meta name="theme-color" content="#07100d" />
+    <title>JGrandson Documentation</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#content">Skip to documentation</a>
+
+    <header class="topbar">
+      <a class="brand" href="#introduction" aria-label="JGrandson documentation home">
+        <span class="brand-mark" aria-hidden="true">JG</span>
+        <span class="brand-copy">
+          <strong>JGrandson</strong>
+          <small>Language documentation</small>
+        </span>
+      </a>
+
+      <button class="search-trigger" type="button" data-open-search aria-label="Search documentation">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 21-4.7-4.7m2.2-5.3a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z" /></svg>
+        <span>Search docs</span>
+        <kbd>Ctrl K</kbd>
+      </button>
+
+      <div class="top-actions">
+        <span class="version-pill">v0.1 preview</span>
+        <button class="icon-button" type="button" data-theme-toggle aria-label="Switch color theme">
+          <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z" /></svg>
+          <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.6 15.7A9 9 0 0 1 8.3 3.4 9 9 0 1 0 20.6 15.7Z" /></svg>
+        </button>
+        <button class="menu-button" type="button" data-menu-toggle aria-label="Open navigation">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <div class="app-shell">
+      <aside class="sidebar" data-sidebar>
+        <nav aria-label="Documentation navigation">
+          <div class="nav-group">
+            <p>Start here</p>
+            <a href="#introduction" class="active">Introduction</a>
+            <a href="#installation">Installation</a>
+            <a href="#first-app">Your first app</a>
+            <a href="#workflow">Daily workflow</a>
+          </div>
+          <div class="nav-group">
+            <p>Language</p>
+            <a href="#language-tour">Language tour</a>
+            <a href="#components">Components &amp; slots</a>
+            <a href="#state-events">State &amp; events</a>
+            <a href="#types-async">Types &amp; async</a>
+          </div>
+          <div class="nav-group">
+            <p>Full stack</p>
+            <a href="#server">Routes &amp; server</a>
+            <a href="#ai">AI &amp; tools <span class="nav-badge">preview</span></a>
+          </div>
+          <div class="nav-group">
+            <p>Compiler</p>
+            <a href="#targets">Compiler targets</a>
+            <a href="#explain">Explainability</a>
+            <a href="#architecture">Architecture</a>
+            <a href="#cli">CLI reference</a>
+          </div>
+          <div class="nav-group">
+            <p>Project</p>
+            <a href="#status">Current status</a>
+            <a href="#roadmap">Roadmap</a>
+            <a href="#packages">Packages</a>
+            <a href="#troubleshooting">Troubleshooting</a>
+          </div>
+        </nav>
+      </aside>
+
+      <main id="content" class="docs">
+        <section id="introduction" class="hero doc-section" data-search-title="Introduction">
+          <div class="hero-kicker"><span></span> Documentation built from the source tree</div>
+          <h1>Build the web in a language that reads like the interface.</h1>
+          <p class="hero-lede">JGrandson is an experimental language for describing interfaces, behavior, server routes, and AI tools in <code>.jg</code> files. It includes a compiler, semantic analyzer, CLI, Vite workflow, language server, and multiple output backends.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#first-app">Build your first page <span>→</span></a>
+            <a class="button secondary" href="#language-tour">Explore the language</a>
+          </div>
+          <div class="signal-grid" aria-label="Project highlights">
+            <div><strong>.jg</strong><span>one readable source format</span></div>
+            <div><strong>3 targets</strong><span>web, React, and server direction</span></div>
+            <div><strong>Live</strong><span>diagnostics and hot reload</span></div>
+          </div>
+          <div class="notice honest">
+            <span class="notice-icon">i</span>
+            <div><strong>Project maturity</strong><p>JGrandson is a preview language under active development. React output and the local development workflow are established. Native web, backend, AI, and advanced compiler analysis exist in varying stages and are marked clearly throughout these docs.</p></div>
+          </div>
+        </section>
+
+        <section id="installation" class="doc-section" data-search-title="Installation">
+          <div class="section-label">01 · Get started</div>
+          <h2>Install the toolchain</h2>
+          <p>JGrandson currently requires Node.js 18 or newer. Inside this repository, install dependencies and build all workspace packages before running the CLI.</p>
+          <div class="code-window">
+            <div class="code-head"><span>Terminal</span><button class="copy-button" type="button">Copy</button></div>
+            <pre><code><span class="prompt">$</span> npm install
+<span class="prompt">$</span> npm run build
+<span class="prompt">$</span> npx jg --version
+<span class="output">jgrandson v0.1.0</span></code></pre>
+          </div>
+          <p>Once the npm packages are publicly available, the intended global installation is:</p>
+          <div class="inline-command"><code>npm install --global @jgrandson/cli</code><button class="copy-button" type="button">Copy</button></div>
+        </section>
+
+        <section id="first-app" class="doc-section" data-search-title="Your first JGrandson app counter page">
+          <div class="section-label">02 · Tutorial</div>
+          <h2>Your first <code>.jg</code> app</h2>
+          <p>Create a page with local state and a button. The structure, state, content, and event live together without JSX or hook ceremony.</p>
+          <div class="lesson-grid">
+            <div class="code-window featured-code">
+              <div class="code-head"><span>src/App.jg</span><button class="copy-button" type="button">Copy</button></div>
+              <pre><code><span class="kw">page</span> <span class="type">Counter</span> {
+  <span class="kw">state</span> {
+    count: <span class="type">number</span> = <span class="num">0</span>
+  }
+
+  main {
+    h1 {
+      text { content: <span class="str">"Count: "</span> + count }
+    }
+
+    button {
+      text: <span class="str">"Increase"</span>
+      onClick { count++ }
+    }
+  }
+}</code></pre>
+            </div>
+            <div class="lesson-steps">
+              <div><span>1</span><p><strong>Create a page</strong><br /><code>page Counter</code> declares a browser entry.</p></div>
+              <div><span>2</span><p><strong>Declare state</strong><br />State is typed and scoped to the page.</p></div>
+              <div><span>3</span><p><strong>Describe the UI</strong><br />Element names mirror familiar HTML tags.</p></div>
+              <div><span>4</span><p><strong>Handle interaction</strong><br />Events can update state directly.</p></div>
+            </div>
+          </div>
+          <div class="code-window compact">
+            <div class="code-head"><span>Terminal</span><button class="copy-button" type="button">Copy</button></div>
+            <pre><code><span class="prompt">$</span> jg dev
+<span class="output">Save App.jg → see the update in your browser</span></code></pre>
+          </div>
+        </section>
+
+        <section id="workflow" class="doc-section" data-search-title="Daily workflow dev check format build">
+          <div class="section-label">03 · Workflow</div>
+          <h2>Write, save, see it</h2>
+          <p>The shortest development loop is deliberate. Start the development server once, then edit <code>.jg</code> files and use the browser as feedback.</p>
+          <div class="flow-line" aria-label="Development workflow">
+            <div><span>01</span><strong>Write</strong><small>Edit a .jg file</small></div>
+            <i>→</i>
+            <div><span>02</span><strong>Save</strong><small>Compiler validates it</small></div>
+            <i>→</i>
+            <div><span>03</span><strong>View</strong><small>Browser updates</small></div>
+          </div>
+          <p>Use <code>jg check</code> in CI, <code>jg format</code> for canonical source formatting, and production builds when measuring performance. Development output includes diagnostics and hot-reload code.</p>
+        </section>
+
+        <section id="language-tour" class="doc-section" data-search-title="Language tour syntax pages styles conditions loops functions imports">
+          <div class="section-label">04 · Language</div>
+          <h2>A compact language tour</h2>
+          <p>A program contains imports followed by pages, components, functions, types, interfaces, routes, or tools. Newlines separate most declarations and statements.</p>
+          <div class="syntax-grid">
+            <article><span class="syntax-icon">P</span><h3>Pages</h3><code>page Home { ... }</code><p>Top-level interface entries selected by the build or router.</p></article>
+            <article><span class="syntax-icon">C</span><h3>Components</h3><code>component Card(title: string)</code><p>Reusable, typed interface units with children and named slots.</p></article>
+            <article><span class="syntax-icon">ƒ</span><h3>Functions</h3><code>function add(a, b): number</code><p>Typed reusable logic, including async functions and error handling.</p></article>
+            <article><span class="syntax-icon">T</span><h3>Types</h3><code>type Result = Data | null</code><p>Primitive, array, union, object, alias, and interface types.</p></article>
+          </div>
+          <div class="tabs" data-tabs>
+            <div class="tab-list" role="tablist">
+              <button role="tab" aria-selected="true" data-tab="conditions">Conditions</button>
+              <button role="tab" aria-selected="false" data-tab="loops">Loops</button>
+              <button role="tab" aria-selected="false" data-tab="styles">Styles</button>
+              <button role="tab" aria-selected="false" data-tab="imports">Imports</button>
+            </div>
+            <div class="tab-panel active" data-panel="conditions"><pre><code><span class="kw">if</span> loggedIn {
+  text { content: <span class="str">"Welcome back"</span> }
+} <span class="kw">else</span> {
+  text { content: <span class="str">"Please sign in"</span> }
+}</code></pre></div>
+            <div class="tab-panel" data-panel="loops"><pre><code><span class="kw">for</span> item <span class="kw">in</span> items {
+  Card(item.title) {}
+}</code></pre></div>
+            <div class="tab-panel" data-panel="styles"><pre><code>style {
+  display: <span class="str">"grid"</span>
+  gap: <span class="num">16</span>
+  color: <span class="str">"#d7ffe7"</span>
+}</code></pre></div>
+            <div class="tab-panel" data-panel="imports"><pre><code><span class="kw">import</span> Card <span class="kw">from</span> <span class="str">"./Card"</span>
+<span class="kw">import</span> { User <span class="kw">as</span> Member } <span class="kw">from</span> <span class="str">"./types"</span></code></pre></div>
+          </div>
+        </section>
+
+        <section id="components" class="doc-section" data-search-title="Components parameters children named slots">
+          <div class="section-label">05 · Composition</div>
+          <h2>Components and slots</h2>
+          <p>Component parameters are typed and may be optional or defaulted. An unnamed <code>slot</code> receives normal children; named slots model areas such as actions or footers.</p>
+          <div class="code-window">
+            <div class="code-head"><span>Card.jg</span><button class="copy-button" type="button">Copy</button></div>
+            <pre><code><span class="kw">component</span> <span class="type">Card</span>(title: <span class="type">string</span>, tone?: <span class="type">string</span> = <span class="str">"calm"</span>) {
+  article {
+    h2 { text { content: title } }
+    slot {
+      text { content: <span class="str">"No content supplied"</span> }
+    }
+    slot(actions) {}
+  }
+}
+
+<span class="kw">page</span> <span class="type">Home</span> {
+  Card(<span class="str">"Welcome"</span>) {
+    text { content: <span class="str">"Build something clear."</span> }
+    slot(actions) { button { text: <span class="str">"Continue"</span> } }
+  }
+}</code></pre>
+          </div>
+        </section>
+
+        <section id="state-events" class="doc-section" data-search-title="State events click input change submit focus blur reactivity">
+          <div class="section-label">06 · Interaction</div>
+          <h2>State and events stay close to the UI</h2>
+          <p>Built-in handlers include <code>onClick</code>, <code>onInput</code>, <code>onChange</code>, <code>onSubmit</code>, <code>onFocus</code>, and <code>onBlur</code>. Input handlers can capture their value directly.</p>
+          <div class="code-window">
+            <div class="code-head"><span>Search.jg</span><button class="copy-button" type="button">Copy</button></div>
+            <pre><code><span class="kw">page</span> <span class="type">Search</span> {
+  <span class="kw">state</span> { query: <span class="type">string</span> = <span class="str">""</span> }
+
+  input {
+    value: query
+    onInput(value) { query = value }
+  }
+
+  text { content: <span class="str">"Searching for: "</span> + query }
+}</code></pre>
+          </div>
+          <div class="notice"><span class="notice-icon">A</span><div><strong>Accessibility is part of analysis</strong><p>The semantic checker reports missing image alternatives and unnamed buttons. More complete UX contracts are being developed in the compiler track.</p></div></div>
+        </section>
+
+        <section id="types-async" class="doc-section" data-search-title="Types interfaces aliases union nullable arrays objects async await try catch">
+          <div class="section-label">07 · Correctness</div>
+          <h2>Types, async work, and errors</h2>
+          <div class="two-column-code">
+            <div class="code-window">
+              <div class="code-head"><span>Types</span><button class="copy-button" type="button">Copy</button></div>
+              <pre><code><span class="kw">export interface</span> <span class="type">User</span> {
+  name: <span class="type">string</span>
+  email?: <span class="type">string</span>
+}
+
+<span class="kw">type</span> <span class="type">MaybeUser</span> = User | <span class="kw">null</span>
+<span class="kw">type</span> <span class="type">Point</span> = { x: <span class="type">number</span>, y: <span class="type">number</span> }</code></pre>
+            </div>
+            <div class="code-window">
+              <div class="code-head"><span>Async</span><button class="copy-button" type="button">Copy</button></div>
+              <pre><code><span class="kw">async function</span> loadName(fallback: <span class="type">string</span>): <span class="type">string</span> {
+  <span class="kw">try</span> {
+    <span class="kw">return await</span> fetchName()
+  } <span class="kw">catch</span> (error: <span class="type">any</span>) {
+    <span class="kw">return</span> fallback
+  }
+}</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <section id="server" class="doc-section" data-search-title="Backend server routes database PostgreSQL SQLite middleware secrets jobs storage">
+          <div class="section-label">08 · Full stack</div>
+          <div class="heading-row"><h2>Routes and server runtime</h2><span class="status in-progress">In progress</span></div>
+          <p>The server target includes typed route declarations and a Node.js runtime direction with middleware, environment access, PostgreSQL and SQLite adapters, migrations, transactions, jobs, and storage interfaces. Several runtime services are still preview implementations.</p>
+          <div class="code-window">
+            <div class="code-head"><span>api.jg</span><button class="copy-button" type="button">Copy</button></div>
+            <pre><code><span class="kw">route</span> POST <span class="str">"/api/search"</span>(query: <span class="type">string</span>) {
+  <span class="kw">return</span> findResults(query)
+}</code></pre>
+          </div>
+          <div class="capability-row">
+            <span>HTTP routes</span><span>Validation</span><span>Auth middleware</span><span>PostgreSQL</span><span>SQLite</span><span>Transactions</span>
+          </div>
+        </section>
+
+        <section id="ai" class="doc-section" data-search-title="AI tools agent model provider authority human approval provenance">
+          <div class="section-label">09 · AI</div>
+          <div class="heading-row"><h2>AI tools with boundaries</h2><span class="status preview">Preview</span></div>
+          <p>AI is designed as a server capability. The repository contains provider-neutral message, provider, tool, and agent interfaces, plus early checks for consequential actions, fallbacks, and data provenance.</p>
+          <div class="code-window">
+            <div class="code-head"><span>knowledge-agent.jg</span><button class="copy-button" type="button">Copy</button></div>
+            <pre><code><span class="kw">tool</span> searchKnowledge(query: <span class="type">string</span>) {
+  <span class="kw">return</span> <span class="str">"Knowledge result: "</span> + query
+}
+
+<span class="kw">route</span> POST <span class="str">"/api/chat"</span>(prompt: <span class="type">string</span>) {
+  <span class="kw">return</span> searchKnowledge(prompt)
+}</code></pre>
+          </div>
+          <div class="notice warning"><span class="notice-icon">!</span><div><strong>Server-side by design</strong><p>Provider credentials and consequential tool execution belong on the server. The roadmap requires validation, permissions, budgets, tracing, fallback behavior, and human approval where appropriate.</p></div></div>
+        </section>
+
+        <section id="targets" class="doc-section" data-search-title="Compiler targets native web React server HTML CSS JavaScript">
+          <div class="section-label">10 · Compiler</div>
+          <h2>One language, focused outputs</h2>
+          <p>JGrandson is moving toward a target-independent compiler pipeline. The repository contains React and early native backends; the native target aims to emit HTML for structure and direct browser JavaScript for interaction.</p>
+          <div class="compiler-diagram" role="img" aria-label="JGrandson source flows through parser analyzer and IR to native React and server backends">
+            <div class="source-node"><strong>App.jg</strong><small>source</small></div>
+            <span>→</span>
+            <div class="pipeline-node"><strong>Parser</strong><small>AST</small></div>
+            <span>→</span>
+            <div class="pipeline-node"><strong>Analyzer</strong><small>types &amp; rules</small></div>
+            <span>→</span>
+            <div class="ir-node"><strong>Typed IR</strong><small>target independent</small></div>
+            <span>→</span>
+            <div class="target-stack">
+              <div><strong>Native</strong><small>HTML · CSS · DOM JS</small></div>
+              <div><strong>React</strong><small>TSX compatibility</small></div>
+              <div><strong>Server</strong><small>Node.js runtime</small></div>
+            </div>
+          </div>
+          <div class="target-cards">
+            <article><span class="status preview">Preview</span><h3>Native web</h3><p>Static HTML where possible and direct DOM bindings for state and events. Current implementation is early and covered by focused tests.</p></article>
+            <article><span class="status available">Available</span><h3>React</h3><p>The established compatibility path emits React and TypeScript and integrates with Vite.</p></article>
+            <article><span class="status in-progress">In progress</span><h3>Server</h3><p>Routes, middleware, databases, environment capabilities, and generated server artifacts.</p></article>
+          </div>
+        </section>
+
+        <section id="explain" class="doc-section" data-search-title="Explain compiler decisions jg explain zero JavaScript effects bundle impact provenance">
+          <div class="section-label">11 · Understand the build</div>
+          <h2>Ask the compiler why</h2>
+          <p><code>jg explain</code> reports whether a page is static, interactive, a React compatibility island, or a server declaration. JSON output is available for tools and CI.</p>
+          <div class="terminal-demo">
+            <div class="terminal-bar"><span></span><span></span><span></span><strong>jg explain examples/landing.jg</strong></div>
+            <pre><code><span class="prompt">$</span> jg explain examples/landing.jg
+
+<span class="terminal-accent">JG-EXP-INTERACTIVE-DOM</span>  Landing
+Target:    native-dom
+Ships JS:  YES
+Reason:    dynamic state and event handlers
+Guarantee: proven
+
+<span class="prompt">$</span> jg explain examples/landing.jg --json</code></pre>
+          </div>
+        </section>
+
+        <section id="architecture" class="doc-section" data-search-title="Architecture lexer parser AST analyzer compiler CLI language server runtime">
+          <div class="section-label">12 · Internals</div>
+          <h2>Compiler architecture</h2>
+          <p>Source locations survive the pipeline so diagnostics can point back to the original file. Target-specific behavior belongs in compiler backends while parsing, analysis, formatting, and editor features remain shared.</p>
+          <ol class="architecture-list">
+            <li><span>01</span><div><strong>Lexer</strong><p>Turns UTF-8 source into tokens with one-based line and column locations.</p></div></li>
+            <li><span>02</span><div><strong>Parser + AST</strong><p>Builds declarations, statements, expressions, elements, routes, and tools.</p></div></li>
+            <li><span>03</span><div><strong>Semantic analyzer</strong><p>Resolves symbols, types, modules, target boundaries, accessibility, provenance, effects, workflows, and lint rules.</p></div></li>
+            <li><span>04</span><div><strong>Compiler backends</strong><p>Generate React/TypeScript, native HTML/DOM output, or server artifacts.</p></div></li>
+            <li><span>05</span><div><strong>Developer tools</strong><p>CLI, Vite plugin, language server, formatter, VS Code extension, and tests share the same language model.</p></div></li>
+          </ol>
+        </section>
+
+        <section id="cli" class="doc-section" data-search-title="CLI commands dev build check explain lint format clean test create">
+          <div class="section-label">13 · Command line</div>
+          <h2>CLI reference</h2>
+          <div class="command-table" role="table" aria-label="JGrandson CLI commands">
+            <div class="command-row header" role="row"><span>Command</span><span>Purpose</span></div>
+            <div class="command-row" role="row"><code>jg dev [dir]</code><span>Start a Vite development server with hot reload.</span></div>
+            <div class="command-row" role="row"><code>jg build [dir]</code><span>Compile the application and select an entry or routing mode.</span></div>
+            <div class="command-row" role="row"><code>jg check [file]</code><span>Parse and semantically validate without emitting files.</span></div>
+            <div class="command-row" role="row"><code>jg explain [file]</code><span>Explain targets, JavaScript impact, dependencies, and effects.</span></div>
+            <div class="command-row" role="row"><code>jg lint [file]</code><span>Apply language-specific style and practice rules.</span></div>
+            <div class="command-row" role="row"><code>jg format [file]</code><span>Format source; use <code>--check</code> in CI.</span></div>
+            <div class="command-row" role="row"><code>jg clean [dir]</code><span>Remove generated build and preview output.</span></div>
+            <div class="command-row" role="row"><code>jg create &lt;name&gt;</code><span>Create minimal, React, or routed starter projects.</span></div>
+          </div>
+        </section>
+
+        <section id="status" class="doc-section" data-search-title="Project status complete in progress preview">
+          <div class="section-label">14 · Project</div>
+          <h2>What is ready today?</h2>
+          <div class="status-board">
+            <div class="status-column done"><h3><span></span>Established</h3><ul><li>Lexer, parser, AST, and diagnostics</li><li>Semantic checking and module resolution</li><li>React/TypeScript generation</li><li>Vite development and hot reload</li><li>Formatter, linter, and explain command</li><li>Language server and VS Code support</li></ul></div>
+            <div class="status-column active"><h3><span></span>Active development</h3><ul><li>Backend and data runtime</li><li>Native HTML and DOM backend</li><li>Typed IR and target separation</li><li>Server capabilities and deployment</li><li>Performance baselines</li></ul></div>
+            <div class="status-column future"><h3><span></span>Planned / experimental</h3><ul><li>Production-grade AI layer</li><li>Resumability and code splitting</li><li>Per-action performance budgets</li><li>Checked workflows and replay</li><li>Reversible visual editing</li></ul></div>
+          </div>
+        </section>
+
+        <section id="roadmap" class="doc-section" data-search-title="Roadmap milestones native web AI deployment compiler provenance effects workflows">
+          <div class="section-label">15 · Direction</div>
+          <h2>The path to 1.0</h2>
+          <p>The roadmap orders work by dependency. Native output sits before the AI and deployment milestones so later features can rely on a stable browser model.</p>
+          <div class="roadmap-list">
+            <div class="complete"><span>0.1–0.5</span><div><strong>Language and tooling foundation</strong><p>Core correctness, project workflow, language completeness, editor tooling, and release preparation.</p></div></div>
+            <div class="current"><span>0.6</span><div><strong>Backend and data runtime</strong><p>Routes, boundaries, middleware, databases, jobs, clients, and observability.</p></div></div>
+            <div><span>0.7</span><div><strong>Native web compiler</strong><p>Typed IR, direct HTML/CSS/DOM output, fine-grained updates, incremental builds, and performance gates.</p></div></div>
+            <div><span>0.8–0.9</span><div><strong>AI and deployment</strong><p>Typed model capabilities followed by reproducible full-stack deployment.</p></div></div>
+            <div><span>0.10–0.16</span><div><strong>Special compiler track</strong><p>Explainability, provenance, effects, budgets, workflows, AI authority, replay, UX contracts, and visual editing.</p></div></div>
+            <div><span>1.0</span><div><strong>Stable language</strong><p>Frozen core semantics, compatibility policy, audits, migration tools, and substantial reference applications.</p></div></div>
+          </div>
+        </section>
+
+        <section id="packages" class="doc-section" data-search-title="Packages ast lexer parser analyzer compiler cli runtime language server">
+          <div class="section-label">16 · Repository map</div>
+          <h2>Workspace packages</h2>
+          <div class="package-grid">
+            <article><code>@jgrandson/ast</code><p>Shared syntax nodes, locations, and diagnostics.</p></article>
+            <article><code>@jgrandson/lexer</code><p>Source text to located tokens.</p></article>
+            <article><code>@jgrandson/parser</code><p>Tokens to the JGrandson program model.</p></article>
+            <article><code>@jgrandson/analyzer</code><p>Types, modules, rules, explainability, effects, and provenance.</p></article>
+            <article><code>@jgrandson/compiler</code><p>Compiler API, IR, React backend, native backend, and server emission.</p></article>
+            <article><code>@jgrandson/cli</code><p>The <code>jg</code> workflow and Vite integration.</p></article>
+            <article><code>@jgrandson/runtime</code><p>Server, database, AI, and React runtime helpers.</p></article>
+            <article><code>@jgrandson/language-server</code><p>Diagnostics, completion, hover, navigation, and rename support.</p></article>
+          </div>
+        </section>
+
+        <section id="troubleshooting" class="doc-section" data-search-title="Troubleshooting command not found dev server format cache errors">
+          <div class="section-label">17 · Help</div>
+          <h2>Common problems</h2>
+          <details><summary><span>jg: command not found</span><b>+</b></summary><p>Use <code>npx jg</code> from a project with the CLI installed, or ensure the global npm binary directory is on your PATH.</p></details>
+          <details><summary><span>The development server does not start</span><b>+</b></summary><p>Check whether another process is using port 5173, then run <code>jg clean</code> to remove generated preview state before retrying.</p></details>
+          <details><summary><span>The editor and CLI report different errors</span><b>+</b></summary><p>Use matching versions of the VS Code extension and <code>@jgrandson/cli</code> in the workspace, then restart the language server.</p></details>
+          <details><summary><span>Lighthouse reports huge development JavaScript</span><b>+</b></summary><p>Measure a production build. Vite development mode includes the client, React development code, source maps, and refresh diagnostics.</p></details>
+        </section>
+
+        <footer class="docs-footer">
+          <div><span class="brand-mark small">JG</span><p><strong>JGrandson</strong><br />An experimental language, compiler, and toolchain.</p></div>
+          <p>These docs describe the repository implementation and roadmap as scanned on October 14, 2026.</p>
+        </footer>
+      </main>
+
+      <aside class="on-this-page" aria-label="On this page">
+        <p>On this page</p>
+        <a href="#introduction" class="active">Introduction</a>
+        <a href="#installation">Installation</a>
+        <a href="#first-app">First app</a>
+        <a href="#language-tour">Language tour</a>
+        <a href="#server">Full stack</a>
+        <a href="#targets">Compiler targets</a>
+        <a href="#status">Project status</a>
+      </aside>
+    </div>
+
+    <dialog class="search-dialog" data-search-dialog>
+      <form method="dialog" class="search-box">
+        <div class="search-input-wrap">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 21-4.7-4.7m2.2-5.3a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z" /></svg>
+          <input type="search" placeholder="Search JGrandson docs…" aria-label="Search documentation" data-search-input />
+          <button value="cancel" aria-label="Close search">Esc</button>
+        </div>
+        <div class="search-results" data-search-results><p>Start typing to search this guide.</p></div>
+      </form>
+    </dialog>
+
+    <div class="toast" role="status" aria-live="polite" data-toast>Copied to clipboard</div>
+    <script src="./app.js"></script>
+  </body>
+</html>

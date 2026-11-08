@@ -1,0 +1,76 @@
+{
+  "name": "jgrandson-language",
+  "displayName": "JGrandson Language",
+  "description": "Language support, syntax highlighting, and file icons for JGrandson.",
+  "version": "0.1.0",
+  "publisher": "jgrandson",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "keywords": [
+    "jgrandson",
+    "jg",
+    "language",
+    "react"
+  ],
+  "main": "./dist/extension.js",
+  "activationEvents": [
+    "onLanguage:jgrandson"
+  ],
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "contributes": {
+    "languages": [
+      {
+        "id": "jgrandson",
+        "aliases": [
+          "JGrandson",
+          "jg"
+        ],
+        "extensions": [
+          ".jg"
+        ],
+        "configuration": "./language-configuration.json",
+        "icon": {
+          "light": "./icons/jg-light.svg",
+          "dark": "./icons/jg-dark.svg"
+        }
+      }
+    ],
+    "grammars": [
+      {
+        "language": "jgrandson",
+        "scopeName": "source.jgrandson",
+        "path": "./syntaxes/jgrandson.tmLanguage.json"
+      }
+    ]
+  },
+  "dependencies": {
+    "vscode-languageclient": "^10.1.2"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "@types/vscode": "^1.140.0",
+    "esbuild": "^0.28.2",
+    "typescript": "^7.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jgrandson/jgrandson.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jgrandson/jgrandson/issues"
+  },
+  "homepage": "https://jgrandson.dev",
+  "author": "JGrandson Team <team@jgrandson.dev>",
+  "publishConfig": {
+    "access": "public"
+  }
+}

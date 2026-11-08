@@ -1,0 +1,84 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "JGrandson",
+  "scopeName": "source.jgrandson",
+  "patterns": [
+    { "include": "#comments" },
+    { "include": "#strings" },
+    { "include": "#numbers" },
+    { "include": "#booleans" },
+    { "include": "#declarations" },
+    { "include": "#keywords" },
+    { "include": "#events" },
+    { "include": "#types" },
+    { "include": "#components" },
+    { "include": "#operators" }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        { "name": "comment.line.double-slash.jgrandson", "match": "//.*$" },
+        {
+          "name": "comment.block.jgrandson",
+          "begin": "/\\*",
+          "end": "\\*/"
+        }
+      ]
+    },
+    "strings": {
+      "name": "string.quoted.double.jgrandson",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        { "name": "constant.character.escape.jgrandson", "match": "\\\\[ntr\"\\\\]" }
+      ]
+    },
+    "numbers": {
+      "name": "constant.numeric.jgrandson",
+      "match": "\\b[0-9]+(?:\\.[0-9]+)?\\b"
+    },
+    "booleans": {
+      "name": "constant.language.boolean.jgrandson",
+      "match": "\\b(?:true|false)\\b"
+    },
+    "declarations": {
+      "patterns": [
+        {
+          "match": "\\b(page|component|function)\\s+([A-Za-z_][A-Za-z0-9_]*)",
+          "captures": {
+            "1": { "name": "storage.type.jgrandson" },
+            "2": { "name": "entity.name.type.jgrandson" }
+          }
+        },
+        {
+          "match": "\\b(import)\\s+([A-Za-z_][A-Za-z0-9_]*)\\s+(from)\\b",
+          "captures": {
+            "1": { "name": "keyword.control.import.jgrandson" },
+            "2": { "name": "entity.name.type.jgrandson" },
+            "3": { "name": "keyword.control.import.jgrandson" }
+          }
+        }
+      ]
+    },
+    "keywords": {
+      "name": "keyword.control.jgrandson",
+      "match": "\\b(?:state|style|let|if|else|for|in|return)\\b"
+    },
+    "events": {
+      "name": "support.function.event.jgrandson",
+      "match": "\\bon[A-Z][A-Za-z0-9_]*\\b"
+    },
+    "types": {
+      "name": "storage.type.primitive.jgrandson",
+      "match": "\\b(?:string|number|boolean|void|any|object)\\b"
+    },
+    "components": {
+      "name": "support.class.component.jgrandson",
+      "match": "\\b[A-Z][A-Za-z0-9_]*\\b"
+    },
+    "operators": {
+      "name": "keyword.operator.jgrandson",
+      "match": "===|==|!=|<=|>=|&&|\\|\\||\\+\\+|--|\\+=|-=|\\*=|/=|[+\\-*/%=!<>]"
+    }
+  }
+}

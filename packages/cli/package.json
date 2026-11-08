@@ -1,0 +1,53 @@
+{
+  "name": "@jgrandson/cli",
+  "version": "1.0.0",
+  "description": "JGrandson CLI - jg dev, jg build, jg check, format, test.",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "bin": {
+    "jg": "bin/jg.js"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./vite": {
+      "types": "./dist/vite.d.ts",
+      "default": "./dist/vite.js"
+    }
+  },
+  "files": [
+    "dist",
+    "bin"
+  ],
+  "dependencies": {
+    "@jgrandson/ast": "^1.0.0",
+    "@jgrandson/analyzer": "^1.0.0",
+    "@jgrandson/lexer": "^1.0.0",
+    "@jgrandson/parser": "^1.0.0",
+    "@jgrandson/compiler": "^1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jgrandson/jgrandson.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jgrandson/jgrandson/issues"
+  },
+  "homepage": "https://jgrandson.dev",
+  "author": "JGrandson Team <team@jgrandson.dev>",
+  "keywords": [
+    "jgrandson",
+    "language",
+    "compiler",
+    "react"
+  ]
+}

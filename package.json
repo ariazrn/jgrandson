@@ -1,0 +1,40 @@
+{
+  "name": "jgrandson-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "JGrandson: a personal productivity language that compiles to React + TypeScript.",
+  "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "tsc -b",
+    "dev": "node packages/cli/bin/jg.js dev examples/landing.jg",
+    "docs:build": "node website/build.mjs",
+    "docs:dev": "npm run docs:build && node scripts/serve-docs.mjs",
+    "preview": "node packages/cli/bin/jg.js build examples/landing.jg --out=my-app/src/jg && npm --prefix my-app run build && npm --prefix my-app run preview -- --host",
+    "watch": "tsc -b --watch",
+    "clean": "node ./scripts/clean.mjs",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "pack:check": "npm run build && npm pack --workspace @jgrandson/cli",
+    "publish:packages": "npm publish --workspace @jgrandson/ast && npm publish --workspace @jgrandson/lexer && npm publish --workspace @jgrandson/parser && npm publish --workspace @jgrandson/analyzer && npm publish --workspace @jgrandson/compiler && npm publish --workspace @jgrandson/cli && npm publish --workspace @jgrandson/language-server && npm publish --workspace @jgrandson/runtime"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.6.3",
+    "vitest": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jgrandson/jgrandson.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jgrandson/jgrandson/issues"
+  },
+  "homepage": "https://jgrandson.dev",
+  "author": "JGrandson Team <team@jgrandson.dev>"
+}

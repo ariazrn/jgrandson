@@ -1,0 +1,33 @@
+component Header(title: string) {
+  state {
+    menuOpen: boolean = false
+  }
+
+  header {
+    style {
+      padding: 24
+    }
+
+    text {
+      content: title
+    }
+
+    button {
+      text: "Menu"
+
+      onClick {
+        menuOpen = !menuOpen
+      }
+    }
+
+    if menuOpen {
+      list {
+        for item in ["Home", "About", "Contact"] {
+          text {
+            content: item
+          }
+        }
+      }
+    }
+  }
+}

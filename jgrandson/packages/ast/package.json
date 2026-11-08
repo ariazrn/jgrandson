@@ -1,0 +1,14 @@
+{
+  "name": "@jgrandson/ast",
+  "version": "0.0.1",
+  "description": "AST node definitions for JGrandson",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -b",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0"
+  }
+}

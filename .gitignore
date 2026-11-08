@@ -1,0 +1,15 @@
+node_modules/
+dist/
+*.tsbuildinfo
+.vscode/
+.idea/
+.DS_Store
+*.log
+coverage/
+.nyc_output/
+.jg-dev-*/
+.jgrandson/
+bin/jgrandson.exe
+bin/*.blob
+website/.sites-package-stage-*/
+website/*.tar.gz

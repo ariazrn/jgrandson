@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  build:
+    name: Build & Test on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        node-version: [18.x, 20.x, 22.x]
+
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Build monorepo
+        run: npm run build
+        
+      - name: Run tests
+        run: npm test
+        
+      - name: Verify package installation
+        if: runner.os == 'Linux' && matrix.node-version == '22.x'
+        run: |
+          npm run pack:check
+          mkdir test-install
+          cd test-install
+          npm init -y
+          # Find the generated tarball and install it
+          npm install ../packages/cli/jgrandson-cli-0.1.0.tgz
+          npx jg --version

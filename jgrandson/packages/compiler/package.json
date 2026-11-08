@@ -1,0 +1,19 @@
+{
+  "name": "@jgrandson/compiler",
+  "version": "0.0.1",
+  "description": "JGrandson compiler - compiles AST to TypeScript/React",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -b",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@jgrandson/ast": "workspace:*",
+    "@jgrandson/parser": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "vitest": "^1.3.0"
+  }
+}

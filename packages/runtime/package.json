@@ -1,0 +1,42 @@
+{
+  "name": "@jgrandson/runtime",
+  "version": "1.0.0",
+  "description": "Node.js server runtime for JGrandson",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -b",
+    "clean": "node ../../scripts/clean.mjs"
+  },
+  "dependencies": {
+    "@types/pg": "^8.23.1",
+    "express": "^4.21.0",
+    "pg": "^8.23.1",
+    "sqlite3": "^6.0.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/react": "^19.3.0",
+    "typescript": "~5.6.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jgrandson/jgrandson.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jgrandson/jgrandson/issues"
+  },
+  "homepage": "https://jgrandson.dev",
+  "author": "JGrandson Team <team@jgrandson.dev>",
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "jgrandson",
+    "language",
+    "compiler",
+    "runtime",
+    "server"
+  ]
+}

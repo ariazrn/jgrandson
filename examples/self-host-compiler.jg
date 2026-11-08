@@ -1,0 +1,92 @@
+// Self-hosting AST Definitions in JGrandson syntax (.jg)
+
+type Position = {
+  offset: number,
+  line: number,
+  column: number
+}
+
+type Token = {
+  type: string,
+  value: string,
+  line: number,
+  column: number
+}
+
+// Self-hosting Lexer written in JGrandson
+function isWhitespace(ch: string): boolean {
+  if (ch == " ") {
+    return true
+  }
+  if (ch == "\\t") {
+    return true
+  }
+  if (ch == "\\n") {
+    return true
+  }
+  return false
+}
+
+function isDigit(ch: string): boolean {
+  if (ch >= "0") {
+    if (ch <= "9") {
+      return true
+    }
+  }
+  return false
+}
+
+function isAlpha(ch: string): boolean {
+  if (ch >= "a") {
+    if (ch <= "z") {
+      return true
+    }
+  }
+  if (ch >= "A") {
+    if (ch <= "Z") {
+      return true
+    }
+  }
+  if (ch == "_") {
+    return true
+  }
+  return false
+}
+
+// Self-hosting Compiler Backend interface in JGrandson
+function compileTargetName(target: string): string {
+  if (target == "wasm") {
+    return "WebAssembly Binary (.wasm)"
+  }
+  if (target == "native") {
+    return "Native SSR Islands (.html)"
+  }
+  return "React TSX (.tsx)"
+}
+
+page CompilerDashboard {
+  state {
+    sourceCode: "function add(a: number, b: number): number { return a + b }"
+    target: "wasm"
+    compiledOutput: ""
+    isCompiling: false
+  }
+
+  main {
+    h1 {
+      text { content: "JGrandson Self-Hosting Compiler v1.0" }
+    }
+    p {
+      text { content: "Self-compiled parser and code generation engine running natively." }
+    }
+
+    button {
+      text { content: "Compile Self-Hosted AST" }
+      event click {
+        state.isCompiling = true
+        state.compiledOutput = compileTargetName(state.target)
+        state.isCompiling = false
+      }
+    }
+  }
+}

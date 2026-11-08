@@ -1,0 +1,13 @@
+export component Button(text: string = "Click me", variant: string = "primary") {
+  style {
+    padding: 10
+    borderRadius: 6
+    border: "none"
+    cursor: "pointer"
+    fontWeight: "bold"
+  }
+  button {
+    class: variant
+    text { content: text }
+  }
+}

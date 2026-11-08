@@ -1,0 +1,345 @@
+tool searchKnowledge(query: string) {
+  return "JGrandson 1.0 Knowledge Base: " + query
+}
+
+route POST "/api/chat"(prompt: string) {
+  return searchKnowledge(prompt)
+}
+
+page AiChat {
+  state {
+    activePrompt: string = ""
+    isTyping: boolean = false
+  }
+
+  style {
+    minHeight: "100vh"
+    padding: "32px 20px"
+    background: "radial-gradient(circle at 15% 15%, #4f46e5 0%, #1e1b4b 35%, #09090b 100%)"
+    color: "#f8fafc"
+    fontFamily: "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+    display: "flex"
+    flexDirection: "column"
+    alignItems: "center"
+    justifyContent: "center"
+  }
+
+  // Header Bar
+  header {
+    style {
+      width: "100%"
+      maxWidth: 900
+      display: "flex"
+      alignItems: "center"
+      justifyContent: "space-between"
+      padding: "16px 24px"
+      marginBottom: 20
+      background: "rgba(255, 255, 255, 0.04)"
+      backdropFilter: "blur(24px)"
+      borderRadius: 20
+      border: "1px solid rgba(255, 255, 255, 0.1)"
+      boxShadow: "0 10px 30px rgba(0, 0, 0, 0.25)"
+    }
+
+    div {
+      style {
+        display: "flex"
+        alignItems: "center"
+        gap: 14
+      }
+
+      div {
+        style {
+          width: 44
+          height: 44
+          borderRadius: 14
+          background: "linear-gradient(135deg, #a855f7, #6366f1)"
+          boxShadow: "0 0 25px rgba(168, 85, 247, 0.45)"
+          display: "flex"
+          alignItems: "center"
+          justifyContent: "center"
+          fontSize: 22
+        }
+        text { content: "✨" }
+      }
+
+      div {
+        div {
+          style {
+            fontSize: 18
+            fontWeight: 700
+            letterSpacing: "-0.02em"
+          }
+          text { content: "JGrandson AI Agent" }
+        }
+        div {
+          style {
+            fontSize: 12
+            color: "#94a3b8"
+            display: "flex"
+            alignItems: "center"
+            gap: 6
+          }
+          span {
+            style {
+              width: 8
+              height: 8
+              borderRadius: "50%"
+              background: "#10b981"
+              boxShadow: "0 0 8px #10b981"
+            }
+          }
+          text { content: "Online • JGrandson 1.0 Core" }
+        }
+      }
+    }
+
+    div {
+      style {
+        display: "flex"
+        alignItems: "center"
+        gap: 10
+      }
+
+      span {
+        style {
+          padding: "6px 14px"
+          borderRadius: 12
+          background: "rgba(255, 255, 255, 0.08)"
+          border: "1px solid rgba(255, 255, 255, 0.12)"
+          fontSize: 13
+          fontWeight: 600
+          color: "#cbd5e1"
+        }
+        text { content: "LLM / Neural Endpoint" }
+      }
+    }
+  }
+
+  // Main Chat Glassmorphic Container
+  main {
+    style {
+      width: "100%"
+      maxWidth: 900
+      height: 600
+      display: "flex"
+      flexDirection: "column"
+      background: "rgba(255, 255, 255, 0.05)"
+      backdropFilter: "blur(30px)"
+      borderRadius: 28
+      border: "1px solid rgba(255, 255, 255, 0.14)"
+      boxShadow: "0 25px 60px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.15)"
+      overflow: "hidden"
+    }
+
+    // Messages Area
+    div {
+      style {
+        flex: 1
+        overflowY: "auto"
+        padding: "28px"
+        display: "flex"
+        flexDirection: "column"
+        gap: 20
+      }
+
+      // Welcome Card
+      div {
+        style {
+          background: "rgba(255, 255, 255, 0.03)"
+          border: "1px solid rgba(255, 255, 255, 0.08)"
+          borderRadius: 18
+          padding: "20px 24px"
+          display: "flex"
+          flexDirection: "column"
+          gap: 8
+        }
+        div {
+          style {
+            fontSize: 16
+            fontWeight: 700
+            color: "#e2e8f0"
+          }
+          text { content: "سلام! چطور می‌تونم کمکت کنم؟" }
+        }
+        div {
+          style {
+            fontSize: 14
+            color: "#94a3b8"
+            lineHeight: 1.6
+          }
+          text { content: "من دستیار هوشمند Nova هستم که مستقیماً روی موتور نیتیو JGrandson اجرا می‌شوم. از ایده‌پردازی گرفته تا کدنویسی، پاسخ‌های سریع و دقیق در اختیارت می‌گذارم." }
+        }
+      }
+
+      // AI Message Bubble (Frosted Glass)
+      div {
+        style {
+          alignSelf: "flex-start"
+          maxWidth: "80%"
+          display: "flex"
+          gap: 12
+        }
+
+        div {
+          style {
+            width: 34
+            height: 34
+            borderRadius: 10
+            background: "linear-gradient(135deg, #a855f7, #6366f1)"
+            display: "flex"
+            alignItems: "center"
+            justifyContent: "center"
+            fontSize: 16
+            flexShrink: 0
+          }
+          text { content: "🤖" }
+        }
+
+        div {
+          style {
+            background: "rgba(255, 255, 255, 0.06)"
+            border: "1px solid rgba(255, 255, 255, 0.12)"
+            backdropFilter: "blur(12px)"
+            borderRadius: "4px 20px 20px 20px"
+            padding: "16px 20px"
+            color: "#f1f5f9"
+            fontSize: 15
+            lineHeight: 1.6
+            boxShadow: "0 8px 24px rgba(0, 0, 0, 0.2)"
+          }
+          text { content: "طراحی شیشه‌ای مدرن (Glassmorphism) به همراه نورپردازی ملایم نئونی برای رابط کاربری پیاده‌سازی شده است. آماده دریافت سوال شما هستم!" }
+        }
+      }
+
+      // User Message Bubble (Gradient Glass)
+      div {
+        style {
+          alignSelf: "flex-end"
+          maxWidth: "75%"
+          background: "linear-gradient(135deg, rgba(99, 102, 241, 0.85), rgba(168, 85, 247, 0.85))"
+          border: "1px solid rgba(255, 255, 255, 0.25)"
+          backdropFilter: "blur(16px)"
+          borderRadius: "20px 20px 4px 20px"
+          padding: "14px 20px"
+          color: "#ffffff"
+          fontSize: 15
+          lineHeight: 1.5
+          boxShadow: "0 10px 25px rgba(99, 102, 241, 0.35)"
+        }
+        text { content: "یک الگوریتم مرتب‌سازی سریع در زبان جدید JGrandson چطور تعریف می‌شود؟" }
+      }
+    }
+
+    // Quick Prompts / Pills
+    div {
+      style {
+        padding: "0 24px 14px"
+        display: "flex"
+        gap: 10
+        overflowX: "auto"
+      }
+
+      button {
+        style {
+          background: "rgba(255, 255, 255, 0.05)"
+          border: "1px solid rgba(255, 255, 255, 0.1)"
+          borderRadius: 20
+          padding: "8px 16px"
+          color: "#cbd5e1"
+          fontSize: 13
+          cursor: "pointer"
+          backdropFilter: "blur(8px)"
+          whiteSpace: "nowrap"
+        }
+        text: "💡 ایده‌های استارتاپی ۲۰۲۶"
+        onClick {
+          activePrompt = "ایده‌های استارتاپی"
+        }
+      }
+
+      button {
+        style {
+          background: "rgba(255, 255, 255, 0.05)"
+          border: "1px solid rgba(255, 255, 255, 0.1)"
+          borderRadius: 20
+          padding: "8px 16px"
+          color: "#cbd5e1"
+          fontSize: 13
+          cursor: "pointer"
+          backdropFilter: "blur(8px)"
+          whiteSpace: "nowrap"
+        }
+        text: "⚡ توضیح کامپایلر نیتیو"
+        onClick {
+          activePrompt = "کامپایلر نیتیو"
+        }
+      }
+
+      button {
+        style {
+          background: "rgba(255, 255, 255, 0.05)"
+          border: "1px solid rgba(255, 255, 255, 0.1)"
+          borderRadius: 20
+          padding: "8px 16px"
+          color: "#cbd5e1"
+          fontSize: 13
+          cursor: "pointer"
+          backdropFilter: "blur(8px)"
+          whiteSpace: "nowrap"
+        }
+        text: "🛠 نوشتن ابزار با JGrandson"
+        onClick {
+          activePrompt = "نوشتن ابزار"
+        }
+      }
+    }
+
+    // Input Box Area
+    div {
+      style {
+        padding: "16px 24px"
+        background: "rgba(0, 0, 0, 0.25)"
+        borderTop: "1px solid rgba(255, 255, 255, 0.08)"
+        display: "flex"
+        alignItems: "center"
+        gap: 14
+      }
+
+      input {
+        style {
+          flex: 1
+          background: "rgba(255, 255, 255, 0.06)"
+          border: "1px solid rgba(255, 255, 255, 0.15)"
+          borderRadius: 16
+          padding: "14px 20px"
+          color: "#ffffff"
+          fontSize: 15
+          outline: "none"
+        }
+        placeholder: "پیامی برای Nova بنویسید..."
+      }
+
+      button {
+        style {
+          background: "linear-gradient(135deg, #6366f1, #a855f7)"
+          border: "none"
+          borderRadius: 16
+          padding: "14px 24px"
+          color: "#ffffff"
+          fontWeight: 600
+          fontSize: 15
+          cursor: "pointer"
+          boxShadow: "0 0 20px rgba(99, 102, 241, 0.4)"
+          display: "flex"
+          alignItems: "center"
+          gap: 8
+        }
+        text: "ارسال 🚀"
+        onClick {
+          isTyping = true
+        }
+      }
+    }
+  }
+}
